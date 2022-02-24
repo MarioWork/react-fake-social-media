@@ -1,12 +1,17 @@
 import React from "react";
 import { FaThumbsUp } from "react-icons/fa";
+import { firstLetterToUpperCase } from "../utils/firstLetterToUpperCase";
+
 import {
   StyledPostCard,
   StyledPostFirstContainer,
   StyledPostSecondContainer,
-} from "./styles/Post.styled";
+  Text,
+} from "./styles/PostCard.styled";
 
-const PostCard = ({ post: { image, likes, publishDate, owner, tags } }) => {
+const PostCard = ({
+  post: { text, image, likes, publishDate, owner, tags },
+}) => {
   //Convert a string datetime to a inverted date
   const convertDate = (dateString) => {
     //Convert str to date
@@ -30,9 +35,10 @@ const PostCard = ({ post: { image, likes, publishDate, owner, tags } }) => {
       <StyledPostFirstContainer>
         <img src={owner.picture} alt="" />
         {tags.map((tag) => (
-          <p>{tag}</p>
+          <p key={tag}>{firstLetterToUpperCase(tag)}</p>
         ))}
       </StyledPostFirstContainer>
+      <Text>{firstLetterToUpperCase(text)}</Text>
       <StyledPostSecondContainer>
         <div>
           <FaThumbsUp color="#673AB7" />

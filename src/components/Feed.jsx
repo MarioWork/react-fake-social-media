@@ -1,12 +1,12 @@
 import React from "react";
 import { StyledFeed } from "./styles/Feed.styled";
-import Post from "./Post";
+import PostCard from "./PostCard";
 
 const Feed = ({ posts }) => {
   return (
     <StyledFeed>
       {posts.length > 0 &&
-        posts.map((post) => <Post key={post.id} post={post} />)}
+        posts.map((post) => <PostCard key={post.id} post={post} />)}
     </StyledFeed>
   );
 };
