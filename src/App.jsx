@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import getAllPosts from "./services/posts-service";
+import Header from "./components/Header";
+import Feed from "./components/Feed";
 
 function App() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -10,35 +12,10 @@ function App() {
   }, [pageNumber]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        "algin-items": "center",
-        "flex-direction": "column",
-      }}
-    >
-      <button
-        onClick={() =>
-          setPageNumber(
-            (prevPageNumber) => (prevPageNumber = prevPageNumber + 1)
-          )
-        }
-      >
-        Next Page
-      </button>
-      {posts.map((post) => (
-        <img
-          style={{
-            width: "400px",
-            height: "300px",
-            "object-fit": "cover",
-            padding: "5px",
-          }}
-          key={post.id}
-          src={post.image}
-        />
-      ))}
-    </div>
+    <>
+      <Header />
+      <Feed posts={posts} />
+    </>
   );
 }
 
