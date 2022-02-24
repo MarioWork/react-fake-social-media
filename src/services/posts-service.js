@@ -1,6 +1,6 @@
 import { API_KEY } from "../secrets";
 
-const getAllPosts = (pageNumber) => {
+export const getAllPosts = (pageNumber) => {
     return fetch("https://dummyapi.io/data/v1/post?page=" + pageNumber, {
         method: "GET",
         headers: {
@@ -12,4 +12,4 @@ const getAllPosts = (pageNumber) => {
 }
 
 
-export default getAllPosts;
+

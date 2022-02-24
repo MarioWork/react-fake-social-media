@@ -1,8 +1,12 @@
 import React from "react";
 import { FaThumbsUp } from "react-icons/fa";
-import { StyledPostCard } from "./styles/Post.styled";
+import {
+  StyledPostCard,
+  StyledPostFirstContainer,
+  StyledPostSecondContainer,
+} from "./styles/Post.styled";
 
-const PostCard = ({ post: { image, likes, publishDate } }) => {
+const PostCard = ({ post: { image, likes, publishDate, owner, tags } }) => {
   //Convert a string datetime to a inverted date
   const convertDate = (dateString) => {
     //Convert str to date
@@ -23,13 +27,19 @@ const PostCard = ({ post: { image, likes, publishDate } }) => {
   return (
     <StyledPostCard>
       <img src={image} alt="" />
-      <div>
+      <StyledPostFirstContainer>
+        <img src={owner.picture} alt="" />
+        {tags.map((tag) => (
+          <p>{tag}</p>
+        ))}
+      </StyledPostFirstContainer>
+      <StyledPostSecondContainer>
         <div>
           <FaThumbsUp color="#673AB7" />
           <p>{likes}</p>
         </div>
         <p>{convertDate(publishDate)}</p>
-      </div>
+      </StyledPostSecondContainer>
     </StyledPostCard>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getAllPosts from "./services/posts-service";
+import { getAllPosts } from "./services/posts-service";
 import Header from "./components/Header";
 import Feed from "./components/Feed";
 
