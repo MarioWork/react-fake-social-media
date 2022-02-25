@@ -8,13 +8,19 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getAllPosts(pageNumber).then((data) => setPosts(data.data));
+    getAllPosts(pageNumber).then((data) =>
+      setPosts((prevPosts) => prevPosts.concat(data.data))
+    );
   }, [pageNumber]);
+
+  function incrementPageNumber() {
+    setPageNumber((prevPage) => (prevPage = prevPage + 1));
+  }
 
   return (
     <>
       <Header />
-      <Feed posts={posts} />
+      <Feed posts={posts} incrementPageNumber={incrementPageNumber} />
     </>
   );
 }
