@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const StyledHeader = styled.header`
     display: flex;
     align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
     color: white;
     height: 80px;
     background: rgb(43,65,117);
@@ -18,6 +21,7 @@ width: 100%;
     & > h1{
         margin-right: auto;
         margin-left: .5em;
+        cursor: pointer;
     }
 
     & > ul   {
