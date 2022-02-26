@@ -4,7 +4,20 @@ import { StyledFeed } from "./styles/Feed.styled";
 import PostCard from "./PostCard";
 import LoadingSpinner from "./LoadingSpinner";
 
-const Feed = ({ posts, incrementPageNumber }) => {
+const Feed = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getAllPosts(pageNumber).then((data) =>
+      setPosts((prevPosts) => prevPosts.concat(data.data))
+    );
+  }, [pageNumber]);
+
+  function incrementPageNumber() {
+    setPageNumber((prevPage) => (prevPage = prevPage + 1));
+  }
+
   return (
     <InfiniteScroll
       dataLength={posts.length}
