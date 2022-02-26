@@ -6,5 +6,4 @@ export const StyledFeed = styled.div`
     align-items: center;
     width: 100%;
     padding: 1em;
-    margin-top: 5em;
 `;

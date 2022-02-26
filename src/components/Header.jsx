@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { StyledHeader, Nav } from "../components/styles/Header.styled";
 
 const Header = () => {
@@ -13,10 +14,10 @@ const Header = () => {
         <h1 onClick={handleLogoClick}>FAKE SOCIAL</h1>
         <ul>
           <li>
-            <a href="">Feed</a>
+            <Link to="/">Feed</Link>
           </li>
           <li>
-            <a href="">Profile</a>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
       </Nav>
