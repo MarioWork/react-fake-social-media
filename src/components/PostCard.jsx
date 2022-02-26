@@ -1,6 +1,6 @@
 import React from "react";
 import { FaThumbsUp } from "react-icons/fa";
-import { firstLetterToUpperCase } from "../utils/firstLetterToUpperCase";
+import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
 
 import {
   StyledPostCard,
