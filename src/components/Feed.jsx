@@ -9,11 +9,14 @@ import LoadingSpinner from "./LoadingSpinner";
 const Feed = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [posts, setPosts] = useState([]);
+  const abortController = new AbortController();
 
   useEffect(() => {
-    getAllPosts(pageNumber).then((data) =>
-      setPosts((prevPosts) => prevPosts.concat(data.data))
-    );
+    getAllPosts(pageNumber, abortController)
+      .then((data) => setPosts((prevPosts) => prevPosts.concat(data.data)))
+      .catch((err) => {});
+
+    return () => abortController.abort();
   }, [pageNumber]);
 
   function incrementPageNumber() {
