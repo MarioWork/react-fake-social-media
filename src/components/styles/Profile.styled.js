@@ -43,7 +43,8 @@ export const UserStatsContainer = styled.div`
 
 export const Line = styled.div`
     height: 2px;
-    width: 75%;
+    width: 100%;
     background-color:#512DA8;
     margin-top: 1em;
+    margin-bottom: 1em;
 `;

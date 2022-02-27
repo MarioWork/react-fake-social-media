@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getUserPosts } from "../services/Posts-Service";
 import { getUser } from "../services/User-Service";
 import { USER_ID } from "../utils/Constants";
+import PostCard from "./PostCard";
 import {
   StyledProfile,
   Container,
@@ -56,8 +57,9 @@ const Profile = () => {
           </div>
         </UserStatsContainer>
       </Container>
-
       <Line />
+      {userPosts.data.length > 0 &&
+        userPosts.data.map((post) => <PostCard key={post.id} post={post} />)}
     </StyledProfile>
   );
 };
