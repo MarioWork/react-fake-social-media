@@ -51,7 +51,7 @@ const PostCard = ({
     const updatedPost = { ...post, likes: +post.likes + 1 };
 
     //Request update
-    updatePost(updatedPost).catch(alert("There was an error!"));
+    updatePost(updatedPost);
 
     //Update only the post in the postcard in question
     setPosts((prevItems) =>

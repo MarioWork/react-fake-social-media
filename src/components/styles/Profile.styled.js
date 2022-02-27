@@ -33,7 +33,7 @@ export const Container = styled.span`
 
 export const UserStatsContainer = styled.div`
     display: flex;
-    width: 110%;
+    width: 120%;
     justify-content: space-evenly;
 
     & > div{

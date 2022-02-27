@@ -14,7 +14,8 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const Profile = () => {
   const [user, setUser] = useState("");
-  const [userPosts, setUserPosts] = useState({ total: 0, data: [] });
+  const [userPosts, setUserPosts] = useState([]);
+  const [total, setTotal] = useState(0);
   const [postsPage, setPostsPage] = useState(0);
   const { id } = useParams();
 
@@ -28,16 +29,10 @@ const Profile = () => {
       .then(
         //Get user posts after user loaded
         getUserPosts(id, postsAbortController, postsPage)
-          .then((data) =>
-            setUserPosts(
-              (prevData) =>
-                (prevData = {
-                  ...prevData,
-                  total: data.total,
-                  data: prevData.data.concat(data.data),
-                })
-            )
-          )
+          .then((data) => {
+            setUserPosts(data.data);
+            setTotal(data.total);
+          })
           .catch((err) => {
             console.log(err);
           })
@@ -64,7 +59,7 @@ const Profile = () => {
           <UserStatsContainer>
             <div>
               <span>Posts</span>
-              {userPosts.total}
+              {total}
               <span></span>
             </div>
             <div>
@@ -74,9 +69,9 @@ const Profile = () => {
         </Container>
       )}
       <Line />
-      {userPosts.data.length > 0 && (
+      {userPosts.length > 0 && (
         <InfiniteScroll
-          dataLength={userPosts.data.length}
+          dataLength={userPosts.length}
           next={incrementPostsPage}
           hasMore={true}
           loader={<LoadingSpinner />}
@@ -86,8 +81,8 @@ const Profile = () => {
             </p>
           }
         >
-          {userPosts.data.map((post) => (
-            <PostCard key={post.id} post={post} />
+          {userPosts.map((post) => (
+            <PostCard key={post.id} post={post} setPosts={setUserPosts} />
           ))}
         </InfiniteScroll>
       )}
