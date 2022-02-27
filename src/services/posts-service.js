@@ -14,7 +14,6 @@ export const getAllPosts = (pageNumber, abortController) => {
 }
 
 export const getUserPosts = (userID, abortController, pageNumber) => {
-    console.log(`${BASE_API_URL}/user/${userID}/post?page=${pageNumber}`);
     return fetch(`${BASE_API_URL}/user/${userID}/post?page=${pageNumber}`, {
         method: "GET",
         headers: {

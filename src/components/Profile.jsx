@@ -51,8 +51,6 @@ const Profile = () => {
     };
   }, [postsPage]);
 
-  console.log(userPosts);
-
   function incrementPostsPage() {
     setPostsPage((prevPage) => (prevPage = prevPage + 1));
   }
@@ -76,20 +74,23 @@ const Profile = () => {
         </Container>
       )}
       <Line />
-      <InfiniteScroll
-        dataLength={userPosts.data.length}
-        next={incrementPostsPage}
-        hasMore={true}
-        loader={<LoadingSpinner />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {userPosts.data.length > 0 &&
-          userPosts.data.map((post) => <PostCard key={post.id} post={post} />)}
-      </InfiniteScroll>
+      {userPosts.data.length > 0 && (
+        <InfiniteScroll
+          dataLength={userPosts.data.length}
+          next={incrementPostsPage}
+          hasMore={true}
+          loader={<LoadingSpinner />}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {userPosts.data.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </InfiniteScroll>
+      )}
     </StyledProfile>
   );
 };
