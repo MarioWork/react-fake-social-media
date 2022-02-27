@@ -3,7 +3,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllPosts } from "../services/Posts-Service";
 import { StyledFeed } from "./styles/Feed.styled";
 import { FeedContainer } from "./styles/FeedContainer.styled";
-import TagsContainer from "./TagsContainer";
 import PostCard from "./PostCard";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -29,7 +28,6 @@ const Feed = () => {
 
   return (
     <FeedContainer>
-      <TagsContainer />
       <InfiniteScroll
         dataLength={posts.length}
         next={incrementPageNumber}
