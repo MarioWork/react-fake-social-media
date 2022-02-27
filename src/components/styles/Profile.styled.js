@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledProfile = styled.div`
     display:flex;
-    width: 500px;
+    width: 600px;
     flex-direction: column;
     align-items: center;
     padding-top: 3em;
@@ -32,6 +32,7 @@ export const UserStatsContainer = styled.div`
         display:flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         background-color: #512DA8;
         border-radius: 10px;
         padding: .3em 2em .3em 2em;

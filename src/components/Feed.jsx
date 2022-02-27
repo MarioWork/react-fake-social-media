@@ -8,9 +8,9 @@ import LoadingSpinner from "./LoadingSpinner";
 const Feed = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [posts, setPosts] = useState([]);
-  const abortController = new AbortController();
 
   useEffect(() => {
+    const abortController = new AbortController();
     getAllPosts(pageNumber, abortController)
       .then((data) => setPosts((prevPosts) => prevPosts.concat(data.data)))
       .catch((err) => {});

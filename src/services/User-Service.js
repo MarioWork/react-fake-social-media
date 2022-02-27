@@ -9,5 +9,4 @@ export const getUser = (userID) => {
         },
     })
         .then((res) => res.json())
-        .then((data) => { return data });
 }
