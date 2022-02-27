@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledLoadingSpinner } from "../components/styles/LoadingSpinner.styled";
 
 const LoadingSpinner = () => {

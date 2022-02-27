@@ -1,4 +1,3 @@
-import React from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
 
@@ -21,7 +20,7 @@ const PostCard = ({
     let monthLength = date.getMonth().toString().length;
 
     //if month length == 1 add a 0 to the start of the string
-    let monthStr = monthLength == 1 ? `0${date.getMonth()}` : date.getMonth();
+    let monthStr = monthLength === 1 ? `0${date.getMonth()}` : date.getMonth();
 
     //join day month and year in a single string
     let finalDateString = `${date.getDate()}-${monthStr}-${date.getFullYear()}`;

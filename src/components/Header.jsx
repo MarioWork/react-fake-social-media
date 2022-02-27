@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { StyledHeader, Nav } from "../components/styles/Header.styled";
 
