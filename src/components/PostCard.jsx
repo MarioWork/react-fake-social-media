@@ -80,6 +80,9 @@ const PostCard = ({
     getPostComments(post.id, commentsListPage)
       .then((data) => {
         setCommentsList(data.data);
+        if (data.data.length < 1) {
+          setHasMoreComments(false);
+        }
       })
       .catch((err) => setHasMoreComments(false));
   }

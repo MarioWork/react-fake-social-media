@@ -28,24 +28,24 @@ const Feed = () => {
 
   return (
     <FeedContainer>
-      <InfiniteScroll
-        dataLength={posts.length}
-        next={incrementPageNumber}
-        hasMore={true}
-        loader={<LoadingSpinner />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        <StyledFeed>
+      <StyledFeed>
+        <InfiniteScroll
+          dataLength={posts.length}
+          next={incrementPageNumber}
+          hasMore={true}
+          loader={<LoadingSpinner />}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
           {posts.length > 0 &&
             posts.map((post) => (
               <PostCard key={post.id} post={post} setPosts={setPosts} />
             ))}
-        </StyledFeed>
-      </InfiniteScroll>
+        </InfiniteScroll>
+      </StyledFeed>
     </FeedContainer>
   );
 };
