@@ -1,14 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
-import { Link } from "react-router-dom";
+import { updatePost } from "../services/Posts-Service";
+import { getPostComments, createComment } from "../services/Comments-Service";
+import { USER_ID, USER_PICTURE } from "../utils/Constants";
 import {
   StyledPostCard,
   StyledPostFirstContainer,
   StyledPostSecondContainer,
   Text,
+  CommentsSectionContainer,
+  Line,
+  InputCommentContainer,
+  CommentsListContainer,
 } from "./styles/PostCard.styled";
-import { updatePost } from "../services/Posts-Service";
+
+import Comment from "./Comment";
 
 const PostCard = ({
   post,
@@ -16,6 +24,9 @@ const PostCard = ({
   post: { text, image, likes, publishDate, owner, tags },
 }) => {
   const [isHover, setIsHover] = useState(false);
+  const [openCommentTab, setOpenCommentTab] = useState(false);
+  const [inputComment, setComment] = useState("");
+  const [commentsList, setCommentsList] = useState([]);
 
   //Convert a string datetime to a inverted date
   const convertDate = (dateString) => {
@@ -44,7 +55,7 @@ const PostCard = ({
     setIsHover(false);
   }
 
-  const handleLikeClick = (e) => {
+  function handleLikeClick(e) {
     e.preventDefault();
 
     //Add a like to the post
@@ -59,7 +70,31 @@ const PostCard = ({
         return item.id !== post.id ? item : updatedPost;
       })
     );
-  };
+  }
+
+  function getComments() {
+    getPostComments(post.id).then((data) => setCommentsList(data.data));
+  }
+
+  //Open the comment tab
+  function handleCommentClick(e) {
+    e.preventDefault();
+    setOpenCommentTab((prevValue) => !prevValue);
+    if (openCommentTab === false) {
+      getComments();
+    }
+  }
+
+  function handleSendCommentClick(e) {
+    if (e.key === "Enter" && inputComment != "") {
+      createComment(post.id, USER_ID, inputComment);
+      setComment("");
+    }
+  }
+
+  function handleInputOnChange(e) {
+    setComment(e.target.value);
+  }
 
   return (
     <StyledPostCard>
@@ -88,6 +123,36 @@ const PostCard = ({
         </div>
         <p>{convertDate(publishDate)}</p>
       </StyledPostSecondContainer>
+      <CommentsSectionContainer>
+        <button onClick={handleCommentClick}>Comment</button>
+        {openCommentTab && (
+          <>
+            <Line />
+            <InputCommentContainer>
+              <Link to={`/profile/${owner.id}`}>
+                <img src={USER_PICTURE} alt=""></img>
+              </Link>
+              <input
+                type="text"
+                placeholder="Insert your comment here..."
+                onKeyDown={handleSendCommentClick}
+                value={inputComment}
+                onChange={handleInputOnChange}
+              />
+            </InputCommentContainer>
+            {commentsList.length > 0 && (
+              <>
+                <Line />
+                <CommentsListContainer>
+                  {commentsList.map((comment) => (
+                    <Comment key={comment.id} comment={comment} />
+                  ))}
+                </CommentsListContainer>
+              </>
+            )}
+          </>
+        )}
+      </CommentsSectionContainer>
     </StyledPostCard>
   );
 };
