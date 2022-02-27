@@ -14,6 +14,7 @@ const Profile = () => {
     return () => abortController.abort();
   }, []);
 
+  console.log(user);
   return (
     <div>{user != "" && <h1>{user.firstName + " " + user.lastName}</h1>}</div>
   );
