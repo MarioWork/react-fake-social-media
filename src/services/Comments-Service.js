@@ -1,8 +1,8 @@
 import { API_KEY } from "../secrets";
 import { BASE_API_URL } from "../utils/Constants";
 
-export const getPostComments = (postID) => {
-    return fetch(`${BASE_API_URL}/post/${postID}/comment`, {
+export const getPostComments = (postID, pageNumber) => {
+    return fetch(`${BASE_API_URL}/post/${postID}/comment?page=` + pageNumber, {
         method: "GET",
         headers: {
             "app-id": API_KEY

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
 import { updatePost } from "../services/Posts-Service";
@@ -17,6 +18,7 @@ import {
 } from "./styles/PostCard.styled";
 
 import Comment from "./Comment";
+import LoadingSpinner from "./LoadingSpinner";
 
 const PostCard = ({
   post,
@@ -27,6 +29,8 @@ const PostCard = ({
   const [openCommentTab, setOpenCommentTab] = useState(false);
   const [inputComment, setComment] = useState("");
   const [commentsList, setCommentsList] = useState([]);
+  const [commentsListPage, setCommentsListPage] = useState(0);
+  const [hasMoreComments, setHasMoreComments] = useState(true);
 
   //Convert a string datetime to a inverted date
   const convertDate = (dateString) => {
@@ -73,7 +77,11 @@ const PostCard = ({
   }
 
   function getComments() {
-    getPostComments(post.id).then((data) => setCommentsList(data.data));
+    getPostComments(post.id, commentsListPage)
+      .then((data) => {
+        setCommentsList(data.data);
+      })
+      .catch((err) => setHasMoreComments(false));
   }
 
   //Open the comment tab
@@ -94,6 +102,10 @@ const PostCard = ({
 
   function handleInputOnChange(e) {
     setComment(e.target.value);
+  }
+
+  function incrementCommentsPageNumber() {
+    setCommentsListPage((prevPage) => (prevPage = prevPage + 1));
   }
 
   return (
@@ -140,16 +152,21 @@ const PostCard = ({
                 onChange={handleInputOnChange}
               />
             </InputCommentContainer>
-            {commentsList.length > 0 && (
-              <>
-                <Line />
-                <CommentsListContainer>
-                  {commentsList.map((comment) => (
-                    <Comment key={comment.id} comment={comment} />
-                  ))}
-                </CommentsListContainer>
-              </>
-            )}
+            <Line />
+
+            <CommentsListContainer>
+              <InfiniteScroll
+                dataLength={commentsList.length}
+                next={incrementCommentsPageNumber}
+                hasMore={hasMoreComments}
+                loader={<LoadingSpinner />}
+                endMessage={<></>}
+              >
+                {commentsList.map((comment) => (
+                  <Comment key={comment.id} comment={comment} />
+                ))}
+              </InfiniteScroll>
+            </CommentsListContainer>
           </>
         )}
       </CommentsSectionContainer>
