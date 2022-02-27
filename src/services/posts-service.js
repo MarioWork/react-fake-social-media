@@ -14,3 +14,15 @@ export const getAllPosts = (pageNumber, abortController) => {
         .then((data) => { return data });
 }
 
+export const getUserPosts = (userID, abortController) => {
+    return fetch(`${BASE_API_URL}/user/${userID}/post`, {
+        method: "GET",
+        headers: {
+            "app-id": API_KEY,
+        },
+        signal: abortController.signal,
+    }).then((res) => res.json()).then((data) => {
+        return data
+    });
+}
+
