@@ -53,22 +53,24 @@ const Profile = () => {
   return (
     <StyledProfile>
       {user != "" && (
-        <Container>
-          <img src={user.picture} alt="" />
-          <h1>{`${user.firstName} ${user.lastName}`}</h1>
-          <UserStatsContainer>
-            <div>
-              <span>Posts</span>
-              {total}
-              <span></span>
-            </div>
-            <div>
-              <span>{user.location.country}</span>
-            </div>
-          </UserStatsContainer>
-        </Container>
+        <>
+          <Container>
+            <img src={user.picture} alt="" />
+            <h1>{`${user.firstName} ${user.lastName}`}</h1>
+            <UserStatsContainer>
+              <div>
+                <span>Posts</span>
+                {total}
+                <span></span>
+              </div>
+              <div>
+                <span>{user.location.country}</span>
+              </div>
+            </UserStatsContainer>
+          </Container>
+          <Line />
+        </>
       )}
-      <Line />
       {userPosts.length > 0 && (
         <InfiniteScroll
           dataLength={userPosts.length}
