@@ -8,8 +8,11 @@ import {
   StyledPostSecondContainer,
   Text,
 } from "./styles/PostCard.styled";
+import { updatePost } from "../services/Posts-Service";
 
 const PostCard = ({
+  post,
+  setPosts,
   post: { text, image, likes, publishDate, owner, tags },
 }) => {
   const [isHover, setIsHover] = useState(false);
@@ -41,6 +44,23 @@ const PostCard = ({
     setIsHover(false);
   }
 
+  const handleLikeClick = (e) => {
+    e.preventDefault();
+
+    //Add a like to the post
+    const updatedPost = { ...post, likes: +post.likes + 1 };
+
+    //Request update
+    updatePost(updatedPost).catch(alert("There was an error!"));
+
+    //Update only the post in the postcard in question
+    setPosts((prevItems) =>
+      prevItems.map((item) => {
+        return item.id !== post.id ? item : updatedPost;
+      })
+    );
+  };
+
   return (
     <StyledPostCard>
       <img src={image} alt="" />
@@ -57,6 +77,7 @@ const PostCard = ({
         <div
           onMouseEnter={handleLikeMouseEnter}
           onMouseLeave={handleLikeMouseLeave}
+          onClick={handleLikeClick}
         >
           {isHover === true ? (
             <FaThumbsUp color="#673AB7" />
