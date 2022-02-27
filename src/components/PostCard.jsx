@@ -1,4 +1,5 @@
-import { FaThumbsUp } from "react-icons/fa";
+import { useState } from "react";
+import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
 import { Link } from "react-router-dom";
 import {
@@ -11,6 +12,8 @@ import {
 const PostCard = ({
   post: { text, image, likes, publishDate, owner, tags },
 }) => {
+  const [isHover, setIsHover] = useState(false);
+
   //Convert a string datetime to a inverted date
   const convertDate = (dateString) => {
     //Convert str to date
@@ -28,12 +31,22 @@ const PostCard = ({
     return finalDateString;
   };
 
+  function handleLikeMouseEnter(e) {
+    e.preventDefault();
+    setIsHover(true);
+  }
+
+  function handleLikeMouseLeave(e) {
+    e.preventDefault();
+    setIsHover(false);
+  }
+
   return (
     <StyledPostCard>
       <img src={image} alt="" />
       <StyledPostFirstContainer>
         <Link to={`/profile/${owner.id}`}>
-          <img src={owner.picture} alt="" />
+          <img src={owner.picture} alt=""></img>
         </Link>
         {tags.map((tag) => (
           <p key={tag}>{firstLetterToUpperCase(tag)}</p>
@@ -41,8 +54,15 @@ const PostCard = ({
       </StyledPostFirstContainer>
       <Text>{firstLetterToUpperCase(text)}</Text>
       <StyledPostSecondContainer>
-        <div>
-          <FaThumbsUp color="#673AB7" />
+        <div
+          onMouseEnter={handleLikeMouseEnter}
+          onMouseLeave={handleLikeMouseLeave}
+        >
+          {isHover === true ? (
+            <FaThumbsUp color="#673AB7" />
+          ) : (
+            <FaRegThumbsUp color="#673AB7" />
+          )}
           <p>{likes}</p>
         </div>
         <p>{convertDate(publishDate)}</p>

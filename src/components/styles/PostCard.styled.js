@@ -50,6 +50,7 @@ export const StyledPostSecondContainer = styled.div`
         width: 100%;
         display: flex;
         padding: 16px;
+        cursor: pointer;
 
     & > div{
         display: flex;
