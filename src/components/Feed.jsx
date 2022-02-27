@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllPosts } from "../services/Posts-Service";
+import { getTags } from "../services/Tag-Service";
 import { StyledFeed } from "./styles/Feed.styled";
 import PostCard from "./PostCard";
 import LoadingSpinner from "./LoadingSpinner";
 
 const Feed = () => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [posts, setPosts] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     const abortController = new AbortController();
+    const tagAbortController = new AbortController();
+
     getAllPosts(pageNumber, abortController)
       .then((data) => setPosts((prevPosts) => prevPosts.concat(data.data)))
       .catch((err) => {});
 
-    return () => abortController.abort();
+    getTags(tagAbortController)
+      .then((data) => setTags(data))
+      .catch((err) => {});
+
+    return () => {
+      abortController.abort();
+      tagAbortController.abort();
+    };
   }, [pageNumber]);
 
   function incrementPageNumber() {
