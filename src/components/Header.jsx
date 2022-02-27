@@ -1,22 +1,20 @@
 import { Link } from "react-router-dom";
 import { StyledHeader, Nav } from "../components/styles/Header.styled";
+import { USER_ID } from "../utils/Constants";
 
 const Header = () => {
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    window.location.reload(false);
-  };
-
   return (
     <StyledHeader>
       <Nav>
-        <h1 onClick={handleLogoClick}>FAKE SOCIAL</h1>
+        <Link to="/">
+          <h1>FAKE SOCIAL</h1>
+        </Link>
         <ul>
           <li>
             <Link to="/">Feed</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to={`/profile/${USER_ID}`}>Profile</Link>
           </li>
         </ul>
       </Nav>

@@ -1,6 +1,6 @@
 import { FaThumbsUp } from "react-icons/fa";
 import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
-
+import { Link } from "react-router-dom";
 import {
   StyledPostCard,
   StyledPostFirstContainer,
@@ -32,7 +32,9 @@ const PostCard = ({
     <StyledPostCard>
       <img src={image} alt="" />
       <StyledPostFirstContainer>
-        <img src={owner.picture} alt="" />
+        <Link to={`/profile/${owner.id}`}>
+          <img src={owner.picture} alt="" />
+        </Link>
         {tags.map((tag) => (
           <p key={tag}>{firstLetterToUpperCase(tag)}</p>
         ))}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getUserPosts } from "../services/Posts-Service";
 import { getUser } from "../services/User-Service";
-import { USER_ID } from "../utils/Constants";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
@@ -16,17 +16,18 @@ const Profile = () => {
   const [user, setUser] = useState("");
   const [userPosts, setUserPosts] = useState({ total: 0, data: [] });
   const [postsPage, setPostsPage] = useState(0);
+  const { id } = useParams();
 
   useEffect(() => {
     const userAbortController = new AbortController();
     const postsAbortController = new AbortController();
 
     //Get user details
-    getUser(USER_ID, userAbortController)
+    getUser(id, userAbortController)
       .then((data) => setUser(data))
       .then(
         //Get user posts after user loaded
-        getUserPosts(USER_ID, postsAbortController, postsPage)
+        getUserPosts(id, postsAbortController, postsPage)
           .then((data) =>
             setUserPosts(
               (prevData) =>

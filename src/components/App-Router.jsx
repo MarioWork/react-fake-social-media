@@ -6,7 +6,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Feed />} />
-      <Route exact path="/profile" element={<Profile />} />
+      <Route exact path="/profile/:id" element={<Profile />} />
     </Routes>
   );
 };

@@ -18,10 +18,15 @@ export const Nav = styled.nav`
 display: flex;
 width: 100%;
 
-    & > h1{
+    & > a {
+        text-decoration: none;
         margin-right: auto;
+    }
+
+    & > a > h1{
         margin-left: .5em;
         cursor: pointer;
+        color: white;
     }
 
     & > ul   {

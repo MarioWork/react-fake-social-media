@@ -8,7 +8,7 @@ height: 430px;
     border-radius: 10px;
     font-weight: 500;
 
-    & > img{
+    & >  img{
         width: 500px;
         height: 300px;
         object-fit: cover;
@@ -21,7 +21,7 @@ export const StyledPostFirstContainer = styled.div`
     align-items: center;
     padding-left: 16px;
 
-    & > img{
+    & > a > img{
         width: 40px;
         height: 40px;
         object-fit: cover;
