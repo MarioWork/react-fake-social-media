@@ -1,5 +1,5 @@
 # React Fake Social Media
-This project consists of a representation of a Fake Social Media using React.js to consume an API. Allows the user to like, comment and check comments on posts, scroll threw a seemless loading list of posts and check the profile of the users.
+This project consists of a representation of a Fake Social Media using React.js to consume an API. Allows the user to like, comment and check comments on posts, scroll threw a seamless loading list of posts and check the profile of the users.
 
 ## Technologies
 + Javascript
