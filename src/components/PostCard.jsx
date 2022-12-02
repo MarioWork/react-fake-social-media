@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
-import { firstLetterToUpperCase } from "../utils/FirstLetterToUpperCase";
-import { updatePost } from "../services/Posts-Service";
-import { getPostComments, createComment } from "../services/Comments-Service";
-import { USER_ID, USER_PICTURE } from "../utils/Constants";
+import { firstLetterToUpperCase } from "../utils/first-letter-to-upper-case";
+import { updatePost } from "../services/posts-service";
+import { getPostComments, createComment } from "../services/comments-service";
+import { USER_ID, USER_PICTURE } from "../utils/constants";
 import {
   StyledPostCard,
   StyledPostFirstContainer,

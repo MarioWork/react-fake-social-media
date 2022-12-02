@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { StyledHeader, Nav } from "../components/styles/Header.styled";
-import { USER_ID } from "../utils/Constants";
+import { USER_ID } from "../utils/constants";
 
 const Header = () => {
   return (

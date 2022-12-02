@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getAllPosts } from "../services/Posts-Service";
+import { getAllPosts } from "../services/posts-service";
 import { StyledFeed } from "./styles/Feed.styled";
 import { FeedContainer } from "./styles/FeedContainer.styled";
 import PostCard from "./PostCard";

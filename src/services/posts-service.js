@@ -1,5 +1,5 @@
 
-import { BASE_API_URL } from "../utils/Constants";
+import { BASE_API_URL } from "../utils/constants";
 
 export const getAllPosts = (pageNumber, abortController) => {
 

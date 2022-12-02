@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUserPosts } from "../services/Posts-Service";
-import { getUser } from "../services/User-Service";
+import { getUserPosts } from "../services/posts-service";
+import { getUser } from "../services/user-service";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {

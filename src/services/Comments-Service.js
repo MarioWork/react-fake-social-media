@@ -1,4 +1,4 @@
-import { BASE_API_URL } from "../utils/Constants";
+import { BASE_API_URL } from "../utils/constants";
 
 export const getPostComments = (postID, pageNumber) => {
     return fetch(`${BASE_API_URL}/post/${postID}/comment?page=` + pageNumber, {
